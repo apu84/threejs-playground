@@ -1,13 +1,11 @@
-import doSomethingElse from "./test";
-import "./styles/index.less"
+import Router from "./js/router";
+import lesson1rotatingCube from "./js/feature/lesson1";
 
-console.log("Hurray");
+document.body.innerHTML =
+    `<a href="/#/lesson1">Lesson 1 - Rotating Cube</a>`;
 
-export const doSomething = () => {
-  console.log('DO SOMETHING');
-}
+const router = new Router();
+router.add('/lesson1', (req) => lesson1rotatingCube());
+router.reload();
 
-for (let i=0; i < 10; i++) {
-  doSomething();
-  doSomethingElse();
-}
+
