@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -18,7 +20,8 @@ module.exports = env => {
         template: path.resolve(__dirname, './src/index.html'),
         filename: "index.html"
       }),
-      new CleanWebpackPlugin()
+      new CleanWebpackPlugin(),
+      new webpack.HotModuleReplacementPlugin()
     ],
 
     module: {
@@ -41,10 +44,20 @@ module.exports = env => {
           use: ['style-loader', 'css-loader']
         },
         {
-          test: /\.less/,
+          test: /\.less$/,
           use: ['style-loader', 'css-loader', 'less-loader']
         }
       ]
+    },
+
+    devtool: env.mode !== 'production' ? 'inline-source-map' : 'hidden-source-map',
+
+    devServer: {
+      contentBase: './public',
+      compress: false,
+      port: env.port || 8000,
+      hot: true,
+      open: true,
     }
   }
 }
