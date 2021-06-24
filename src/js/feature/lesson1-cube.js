@@ -2,14 +2,16 @@ import * as THREE from "three";
 
 function lesson1rotatingCube() {
   const scene = new THREE.Scene();
-  let fov = 75;
+  const fov = 75;
+  const colors = ['red', 'purple', 'green', 'yellow', 'white', 'teal', 'blue', 'brown', 'chocolate', 'coral', 'burlywood'];
   const camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, .1, 1000);
   const geometry = new THREE.BoxGeometry(1, 1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 'red' });
+  const material = new THREE.MeshBasicMaterial({ color: getColor() });
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
-  camera.position.z = 5;
+  let cameraX = 0, cameraY = 0, cameraZ = 10;
+  camera.position.set(cameraX, cameraY, cameraZ);
 
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -24,7 +26,6 @@ function lesson1rotatingCube() {
 
   animate();
 
-  const colors = ['red', 'purple', 'green', 'yellow', 'white', 'teal', 'blue', 'brown', 'chocolate', 'coral', 'burlywood'];
 
   function getColor() {
     return colors[getRandom(colors.length)];
@@ -34,21 +35,34 @@ function lesson1rotatingCube() {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  const ADJUSTMENT_UNIT = 0.25;
+  document.addEventListener('keydown', event => {
+   if(event.key.startsWith('Arrow')) {
+     if (event.key === 'ArrowRight') {
+       cameraX += ADJUSTMENT_UNIT;
+     } else if (event.key === 'ArrowLeft') {
+       cameraX -= ADJUSTMENT_UNIT;
+     } else if (event.key === 'ArrowUp') {
+       cameraY += ADJUSTMENT_UNIT;
+     } else if (event.key === 'ArrowDown') {
+       cameraY -= ADJUSTMENT_UNIT;
+     }
+     camera.position.set(cameraX, cameraY, cameraZ);
+     camera.updateProjectionMatrix();
+   }
+  });
+
   document.addEventListener('click', (event) => {
     cube.material = new THREE.MeshBasicMaterial({ color: getColor() });
   });
 
   document.addEventListener('wheel', (event) => {
     if (event.deltaY >= 0) {
-      if (fov + 1 <= 180) {
-        fov += 1
-      }
+      cameraZ += ADJUSTMENT_UNIT;
     } else {
-      if (fov + 1 >= 0) {
-        fov -= 1;
-      }
+      cameraZ -= ADJUSTMENT_UNIT;
     }
-    camera.fov = fov;
+    camera.position.set(cameraX, cameraY, cameraZ);
     camera.updateProjectionMatrix();
   });
 }
