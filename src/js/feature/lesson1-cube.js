@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { addAnimation } from "../../index";
 
 function lesson1rotatingCube() {
   const scene = new THREE.Scene();
@@ -15,7 +16,7 @@ function lesson1rotatingCube() {
 
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+  addAnimation(renderer.domElement);
 
   function animate() {
     requestAnimationFrame(animate);
