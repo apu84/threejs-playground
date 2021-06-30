@@ -53,7 +53,7 @@ module.exports = env => {
     devtool: env.mode !== 'production' ? 'inline-source-map' : 'hidden-source-map',
 
     devServer: {
-      contentBase: './public',
+      contentBase: path.resolve(__dirname, './src'),
       compress: false,
       port: env.port || 8000,
       hot: true,

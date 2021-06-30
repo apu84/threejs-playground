@@ -17,6 +17,10 @@ function createCube() {
     cube.rotation.x += delta * radiansPerSecond;
   };
 
+  cube.updateTexture = (image) => {
+    material.updateTexture(image);
+  }
+
   return cube;
 }
 
