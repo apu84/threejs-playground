@@ -1,7 +1,7 @@
-import { MeshBasicMaterial } from "three";
+import { MeshBasicMaterial, MeshStandardMaterial } from "three";
 
 function createMaterial() {
-  return new MeshBasicMaterial({
+  return new MeshStandardMaterial({
     'color': 'red'
   });
 }

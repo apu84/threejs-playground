@@ -5,6 +5,7 @@ import { resizer } from "./systems/resizer";
 import { createCube } from "./components/cube";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Loop } from "./systems/Loop";
+import { createLights } from "./components/lights";
 
 let scene, camera, renderer, loop;
 
@@ -12,8 +13,10 @@ class World {
   constructor(container) {
     scene = createScene();
 
+    const lights = createLights();
+
     const cube = createCube();
-    scene.add(cube);
+    scene.add(cube, lights);
 
     let cameraObj = createCamera();
     camera = cameraObj.camera;
