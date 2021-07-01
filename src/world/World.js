@@ -11,6 +11,7 @@ import wall from "../assets/textures/wall-1087955_640.jpg";
 import wood from "../assets/textures/wood-591631_640.jpg";
 import lumber from "../assets/textures/lumber-84678_640.jpg";
 import brick from "../assets/textures/brickwall-21534_640.jpg";
+import { loadBirds } from "./components/brids/birds";
 
 let scene, camera, renderer, loop;
 
@@ -65,11 +66,10 @@ class World {
       button.innerHTML = `<i class="fa fa-${icon}"></i>`;
 
       button.addEventListener('click', () => {
-        if(isPlaying) {
+        if (isPlaying) {
           icon = 'play';
           this.stop();
-        }
-        else {
+        } else {
           icon = 'pause';
           this.start();
         }
@@ -80,6 +80,13 @@ class World {
     }
 
     addPlayButton();
+  }
+
+  async init() {
+    const { parrot, flamingo } = await loadBirds();
+    scene.add(parrot, flamingo);
+    loop.addComponent(parrot);
+    loop.addComponent(flamingo);
   }
 
   render() {
