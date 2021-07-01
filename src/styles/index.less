@@ -5,19 +5,52 @@ body {
   }
 
   #scene-container {
-    /* tell our scene container to take up the full page */
     position: absolute;
     width: 100%;
     height: 100%;
-
-    /*
-      Set the container's background color to the same as the scene's
-      background to prevent flashing on load
-    */
     background-color: #e0e0e0;
   }
 
-  button:hover{
-    cursor: pointer;
+  button {
+    & {
+      z-index: 1;
+      position: absolute;
+      bottom: 10px;
+    }
+
+    &.texture:hover {
+      cursor: pointer;
+      border-radius: 50px;
+      background: #fcad26;
+      color: #fff;
+    }
+
+    &.texture {
+      border: 3px solid #fcad26;
+      border-radius: 50px;
+      color: #fcad26;
+      background-color: white;
+      padding: 15px 35px;
+      margin: 0 10px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 25px;
+      height: 15px;
+    }
+
+    &.play {
+      width: 45px;
+      height: 30px;
+      right: 5px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
