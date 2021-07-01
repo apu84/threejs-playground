@@ -7,7 +7,6 @@ async function loadBirds() {
     loader.loadAsync('assets/model/Parrot.glb'),
     loader.loadAsync('assets/model/Flamingo.glb')
   ]);
-  console.log(parrotJson);
   const parrot = setupModel(parrotJson.scene.children[0], parrotJson.animations[0]);
   parrot.position.set(50, 0, -80);
 
