@@ -19,10 +19,10 @@ class World {
   constructor(container) {
     scene = createScene();
 
-    const lights = createLights();
+    const { directionalLights, ambientLight } = createLights({});
 
     const cube = createCube();
-    scene.add(cube, lights);
+    scene.add(cube, directionalLights, ambientLight);
 
     camera = createCamera();
 

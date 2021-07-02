@@ -1,8 +1,10 @@
-import { WebGLRenderer } from "three";
+import { WebGLRenderer, sRGBEncoding } from "three";
 
 function createRenderer() {
-  const renderer = new WebGLRenderer();
-
+  const renderer = new WebGLRenderer( {
+    antialias: true
+  });
+  renderer.outputEncoding = sRGBEncoding;
   const render = (scene, camera) => {
     renderer.render(scene, camera);
   }
